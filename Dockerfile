@@ -1,17 +1,19 @@
-# Python 3.11 resmi imajını kullan
-FROM python:3.11-slim
+FROM python:3.11
 
-# Çalışma dizinini ayarla
+# Çalışma dizini
 WORKDIR /app
 
-# Gerekli dosyaları kopyala
+# Gereksinimler dosyasını kopyalayın
 COPY requirements.txt /app/
 
-# Gereksinimleri yükle
+# Gereksinimleri yükleyin
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Uygulama dosyalarını kopyala
+# Flask ve werkzeug sürümlerini belirleyin
+RUN pip install flask==2.3.0 werkzeug==2.3.0
+
+# Uygulama dosyalarını kopyalayın
 COPY . /app/
 
-# Flask uygulamasını başlat
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+# Flask uygulamasını çalıştırın
+CMD ["flask", "run", "--host=0.0.0.0"]
